@@ -1,0 +1,152 @@
+todo:
+
+find my charger (30 min)
+
+fullstack react (2 hours)
+
+App 1
+React Methods: Render()
+========================
+ProductList:
+class ProductList extends React.Component{
+	render(){
+		return (
+ 		 	< SOME HTML >
+		);
+	}
+};
+
+Render: ReactDOM.render(what, where)
+ReactDOM.render(
+	<ProductList/>,
+	document.getElementById('content')
+);
+
+
+
+We're using JSX, so include Babel Interpreter
+
+App 2
+Product Class
+=====================
+class Product extends React.Component{
+	render(){
+		return(
+			< div>
+				<img src>
+				<div classname>
+			</div>
+		);
+	}
+}
+
+
+
+App 3
+Data Driven Modelling: Seed.js, product = [] is json data
+===============================================================
+JSX is delimited by '' or {}
+
+We render Product inside of Product List
+Pass down values:
+(Inside ProductList)
+<Product id={product.id} title={product.title} etc etc />
+
+(Inside Product)
+<img src = {this.product.imgUrl}/>
+<a href = {this.product.title}></a>
+etc etc
+
+
+
+App 4
+Rendering Multiple Products (Arrow Function)
+===============================================================
+const ProductComponents = Seed.products.map( product => ( <Product etc etc etc		/>
+														)
+											)
+
+App 5
+Sorting By Upvotes ()
+===============================================================
+
+const products = Seed.products.sort( (a, b) =>
+	(
+		b.votes - a.votes
+	)
+	);
+const ProductComponents = Seed.products.map( product => ( <Product etc etc etc		/>
+														)
+											)
+
+App 6
+React's Data Flow is Uni-directional
+===============================================================
+Product can read its votes but not modify them. Props are owned by Parents
+
+How do we update the Data then?
+
+class ProductList extends React.Component{
+	handleProductUpdate(productID());
+
+	render(){
+		return (
+ 		 	< SOME HTML >
+		);
+	}
+};
+
+
+Have a Function as well in Product that calls ProductList.handleProductUpVote,
+Pass it down into Product div
+<Product onVote = {this.handleProductUpVote} etc etc />
+
+Inside Product, pass the Product ID to onVote
+handleUpVote() {
+	this.props.onVote(this.props.id);
+}
+
+Inside <Product> render:
+<a onClick={this.handleUpVote}></a>
+
+1. A is clicked
+2. Product's this.handleUpVote is called
+3. Product's handleUpVote works on 
+
+===========================================================
+How does "this" work?
+Render() / other special React functions: this binds to components
+handleUpVote() / Any other function: this binds to other things
+
+How to bind this to components:
+We'll have to bind each function to the component in question:
+constructor(props) {
+    super(props);
+
+    this.handleUpVote = this.handleUpVote.bind(this);
+  }
+
+
+
+We've successfully called the component id
+
+
+App 7
+Props are Owned by Parents, State is owned by components: How do we initialize?
+===========================================================
+When States update, the component will re-render
+
+States are properties that will have to be initialized, both components and states
+
+this.state = {}
+
+ComponentDidMount(){
+	this.setState( const:Seed.products)
+}
+
+
+App 8 Has Nothing
+
+
+App 9
+Proper
