@@ -1,7 +1,7 @@
 ### About the app
 
 I wrote a basic task tracker in React as a learning project. 
-Each Task takes in a description and estimated completion time;
+Each Task takes in a description and estimated completion time:
 - Tasks are sorted based on time
 - New Tasks can be added
 - Tasks can be deleted
